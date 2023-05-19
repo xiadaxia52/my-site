@@ -1,6 +1,6 @@
 package cn.luischen.controller.admin;
 
-import cn.luischen.api.QiniuCloudService;
+//import cn.luischen.api.QiniuCloudService;
 import cn.luischen.constant.ErrorConstant;
 import cn.luischen.constant.Types;
 import cn.luischen.constant.WebConst;
@@ -8,6 +8,8 @@ import cn.luischen.dto.AttAchDto;
 import cn.luischen.exception.BusinessException;
 import cn.luischen.model.AttAchDomain;
 import cn.luischen.model.UserDomain;
+import cn.luischen.oss.MinioFile;
+import cn.luischen.oss.MinioService;
 import cn.luischen.service.attach.AttAchService;
 import cn.luischen.utils.APIResponse;
 import cn.luischen.utils.Commons;
@@ -46,7 +48,8 @@ public class AttAchController {
     @Autowired
     private AttAchService attAchService;
     @Autowired
-    private QiniuCloudService qiniuCloudService;
+    private MinioService minioService;
+    //private QiniuCloudService qiniuCloudService;
 
 
 
@@ -85,18 +88,21 @@ public class AttAchController {
 
             String fileName = TaleUtils.getFileKey(file.getOriginalFilename()).replaceFirst("/","");
 
-            qiniuCloudService.upload(file, fileName);
+            MinioFile minioFile = minioService.putFile(minioService.getBaseBucketName(), file);
+            fileName = minioFile.getName();
+            //qiniuCloudService.upload(file, fileName);
             AttAchDomain attAch = new AttAchDomain();
             HttpSession session = request.getSession();
             UserDomain sessionUser = (UserDomain) session.getAttribute(WebConst.LOGIN_SESSION_KEY);
             attAch.setAuthorId(sessionUser.getUid());
             attAch.setFtype(TaleUtils.isImage(file.getInputStream()) ? Types.IMAGE.getType() : Types.FILE.getType());
             attAch.setFname(fileName);
-            String baseUrl = qiniuCloudService.QINIU_UPLOAD_SITE.endsWith("/") ? qiniuCloudService.QINIU_UPLOAD_SITE : qiniuCloudService.QINIU_UPLOAD_SITE + "/";
-            attAch.setFkey(baseUrl + fileName);
+            //String baseUrl = qiniuCloudService.QINIU_UPLOAD_SITE.endsWith("/") ? qiniuCloudService.QINIU_UPLOAD_SITE : qiniuCloudService.QINIU_UPLOAD_SITE + "/";
+            //attAch.setFkey(baseUrl + fileName);
+            attAch.setFkey(minioFile.getLink());
             attAchService.addAttAch(attAch);
             response.getWriter().write( "{\"success\": 1, \"message\":\"上传成功\",\"url\":\"" + attAch.getFkey() + "\"}" );
-        } catch (IOException e) {
+        } catch (Exception e) {
             e.printStackTrace();
             try {
                 response.getWriter().write( "{\"success\":0}" );
@@ -125,20 +131,23 @@ public class AttAchController {
             for (MultipartFile file : files) {
 
                 String fileName = TaleUtils.getFileKey(file.getOriginalFilename()).replaceFirst("/","");
-
-                qiniuCloudService.upload(file, fileName);
+                MinioFile minioFile = minioService.putFile(minioService.getBaseBucketName(), file);
+                fileName = minioFile.getName();
+                //qiniuCloudService.upload(file, fileName);
                 AttAchDomain attAch = new AttAchDomain();
                 HttpSession session = request.getSession();
                 UserDomain sessionUser = (UserDomain) session.getAttribute(WebConst.LOGIN_SESSION_KEY);
                 attAch.setAuthorId(sessionUser.getUid());
                 attAch.setFtype(TaleUtils.isImage(file.getInputStream()) ? Types.IMAGE.getType() : Types.FILE.getType());
                 attAch.setFname(fileName);
-                String baseUrl = qiniuCloudService.QINIU_UPLOAD_SITE.endsWith("/") ? qiniuCloudService.QINIU_UPLOAD_SITE : qiniuCloudService.QINIU_UPLOAD_SITE + "/";
-				attAch.setFkey(baseUrl + fileName);
+//                String baseUrl = qiniuCloudService.QINIU_UPLOAD_SITE.endsWith("/") ? qiniuCloudService.QINIU_UPLOAD_SITE : qiniuCloudService.QINIU_UPLOAD_SITE + "/";
+//				attAch.setFkey(baseUrl + fileName);
+                attAch.setFkey(minioFile.getLink());
+                attAchService.addAttAch(attAch);
                 attAchService.addAttAch(attAch);
             }
             return APIResponse.success();
-        } catch (IOException e) {
+        } catch (Exception e) {
             e.printStackTrace();
             throw BusinessException.withErrorCode(ErrorConstant.Att.UPLOAD_FILE_FAIL)
                     .withErrorMessageArguments(e.getMessage());

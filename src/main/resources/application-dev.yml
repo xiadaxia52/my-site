@@ -74,3 +74,9 @@ qiniu:
   bucket: ""
   cdn:
     url: ""
+
+minio:
+  endpoint: "http://xx.xx.xx.xx:9000"
+  accessKey: "xxx"
+  secretKey: "xxx"
+  bucketName: "xxx"
