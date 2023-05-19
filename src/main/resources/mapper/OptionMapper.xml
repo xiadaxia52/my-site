@@ -8,7 +8,7 @@
 
     <!-- 网站配置基本列 -->
     <sql id="BASE_COLUMN">
-        o.name, o.value,o.description
+        IFNULL(o.name, '') AS `name`, IFNULL(o.value, '') AS `value`, IFNULL(o.description, '') AS `description`
     </sql>
 
 

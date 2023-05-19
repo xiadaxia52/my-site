@@ -258,7 +258,7 @@ main[role="main-home-wrapper"] article[role="pge-title-content"] p, main[role="m
 /*===== footer ===*/
 
 footer[role="footer"] {
-	background-color: #FFF;
+	/*background-color: #FFF;*/
 	padding-top: 100px;
 	padding-bottom: 77px
 }

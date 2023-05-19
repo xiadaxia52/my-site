@@ -140,10 +140,9 @@ public class AttAchController {
                 attAch.setAuthorId(sessionUser.getUid());
                 attAch.setFtype(TaleUtils.isImage(file.getInputStream()) ? Types.IMAGE.getType() : Types.FILE.getType());
                 attAch.setFname(fileName);
-//                String baseUrl = qiniuCloudService.QINIU_UPLOAD_SITE.endsWith("/") ? qiniuCloudService.QINIU_UPLOAD_SITE : qiniuCloudService.QINIU_UPLOAD_SITE + "/";
+//              String baseUrl = qiniuCloudService.QINIU_UPLOAD_SITE.endsWith("/") ? qiniuCloudService.QINIU_UPLOAD_SITE : qiniuCloudService.QINIU_UPLOAD_SITE + "/";
 //				attAch.setFkey(baseUrl + fileName);
                 attAch.setFkey(minioFile.getLink());
-                attAchService.addAttAch(attAch);
                 attAchService.addAttAch(attAch);
             }
             return APIResponse.success();
@@ -168,6 +167,7 @@ public class AttAchController {
             if (null == attAch)
                 throw BusinessException.withErrorCode(ErrorConstant.Att.DELETE_ATT_FAIL +  ": 文件不存在");
             attAchService.deleteAttAch(id);
+            minioService.removeFile(minioService.getBaseBucketName(), attAch.getFname());
             return APIResponse.success();
         } catch (Exception e) {
             e.printStackTrace();
