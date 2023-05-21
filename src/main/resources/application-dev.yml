@@ -10,10 +10,13 @@ spring:
         druid:
           #监控统计拦截的filters
           filters: stat
-          driver-class-name: com.mysql.jdbc.Driver
+          driver-class-name: com.mysql.cj.jdbc.Driver
           #基本属性
-          url: jdbc:mysql://127.0.0.1:3306/lu_tale?useUnicode=true&characterEncoding=UTF-8&allowMultiQueries=true
+          url: jdbc:mysql://172.17.0.2:3306/lu_tale?useSSL=false&useUnicode=true&characterEncoding=utf-8&zeroDateTimeBehavior=convertToNull&transformedBitIsBoolean=true&serverTimezone=GMT%2B8&nullCatalogMeansCurrent=true&allowPublicKeyRetrieval=true
+#          url: jdbc:mysql://101.33.242.152:53306/lu_tale?useSSL=false&useUnicode=true&characterEncoding=utf-8&zeroDateTimeBehavior=convertToNull&transformedBitIsBoolean=true&serverTimezone=GMT%2B8&nullCatalogMeansCurrent=true&allowPublicKeyRetrieval=true
+#          url: jdbc:mysql://127.0.0.1:3306/lu_tale?useSSL=false&useUnicode=true&characterEncoding=utf-8&zeroDateTimeBehavior=convertToNull&transformedBitIsBoolean=true&serverTimezone=GMT%2B8&nullCatalogMeansCurrent=true&allowPublicKeyRetrieval=true
           username: root
+#          password: uKx6G$bY16Z7
           password: mac123
           #配置初始化大小/最小/最大
           initial-size: 1
@@ -76,7 +79,7 @@ qiniu:
     url: ""
 
 minio:
-  endpoint: "http://xx.xx.xx.xx:9000"
-  accessKey: "xxx"
-  secretKey: "xxx"
-  bucketName: "xxx"
+  endpoint: "http://101.33.242.152:59000"
+  accessKey: "admin"
+  secretKey: "O61WnhxtBPcEs"
+  bucketName: "luoyu"
