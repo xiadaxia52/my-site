@@ -4,9 +4,6 @@
 <div th:replace="site/head::head(${commons.site_title()},${commons.google_site_verification()}, ${commons.baidu_site_verification()})"></div>
 
 <body>
-<div id="picture"></div>
-<div id="layer2"></div>
-<div id="layer1"></div>
 
 <!-- header -->
 
@@ -21,9 +18,10 @@
     <section class="col-xs-12 col-sm-6 col-md-6 col-lg-6 ">
       <article role="pge-title-content">
         <header>
-          <h2><span class="particletext bubbles"><span class="text">作 品 集</span></span> UX|UI 设计师</h2>
+          <h2><span>我的作品</span>  </h2>
         </header>
-        <p>欢迎来到我的个人网站！</p>
+        <p>创作是一种灵感的流动，它需要我们保持开放的心态和敏锐的感知。</p>
+        <p style="text-align: right;">—— 约翰·博因</p>
       </article>
     </section>
     <th:block th:each="archive,archiveStat : ${archives.list}">
