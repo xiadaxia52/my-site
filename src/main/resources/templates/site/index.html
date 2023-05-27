@@ -3,7 +3,7 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <div th:replace="site/head::head(${commons.site_title()},${commons.google_site_verification()}, ${commons.baidu_site_verification()})"></div>
 
-<body>
+<body th:style="${'background-size: cover;background-image: url('+commons.social_bg()+');'}">
 
 <!-- header -->
 
@@ -18,7 +18,7 @@
     <section class="col-xs-12 col-sm-6 col-md-6 col-lg-6 ">
       <article role="pge-title-content">
         <header>
-          <h2><span>我的作品</span>  </h2>
+          <h2><span><th:block th:text="${commons.social_worktitle()}"></th:block></span>  </h2>
         </header>
         <p>创作是一种灵感的流动，它需要我们保持开放的心态和敏锐的感知。</p>
         <p style="text-align: right;">—— 约翰·博因</p>

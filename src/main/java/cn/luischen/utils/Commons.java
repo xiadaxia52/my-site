@@ -102,6 +102,38 @@ public class Commons {
     }
 
     /**
+     * 获取logo地址
+     * @return
+     */
+    public static String social_logo(){
+        return site_option("social_logo");
+    }
+
+    /**
+     * 获取bg地址
+     * @return
+     */
+    public static String social_bg(){
+        return site_option("social_bg");
+    }
+
+    /**
+     * 获取bg地址
+     * @return
+     */
+    public static String social_worktitle(){
+        return site_option("social_worktitle");
+    }
+
+    /**
+     * 获取bg地址
+     * @return
+     */
+    public static String social_blogtitle(){
+        return site_option("social_blogtitle");
+    }
+
+    /**
      * 获取google网站验证码
      * @return
      */
@@ -241,6 +273,10 @@ public class Commons {
         map.put("zhihu", WebConst.initConfig.get(prefix + "zhihu"));
         map.put("github", WebConst.initConfig.get(prefix + "github"));
         map.put("twitter", WebConst.initConfig.get(prefix + "twitter"));
+        map.put("logo", WebConst.initConfig.get(prefix + "logo"));
+        map.put("bg", WebConst.initConfig.get(prefix + "bg"));
+        map.put("worktitle", WebConst.initConfig.get(prefix + "worktitle"));
+        map.put("blogtitle", WebConst.initConfig.get(prefix + "blogtitle"));
         return map;
     }
 

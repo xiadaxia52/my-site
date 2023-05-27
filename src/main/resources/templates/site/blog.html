@@ -3,7 +3,7 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <div th:replace="site/head::head(${commons.site_title()},${commons.google_site_verification()}, ${commons.baidu_site_verification()})"></div>
 
-<body>
+<body th:style="${'background-size: cover;background-image: url('+commons.social_bg()+');'}">
 
 
 <!-- header -->
@@ -25,7 +25,7 @@
 
             <article role="pge-title-content" class="blog-header">
                 <header>
-                    <h2><span>我的博客</span> </h2>
+                    <h2><span><th:block th:text="${commons.social_blogtitle()}"></th:block></span> </h2>
                 </header>
                 <p>记录是思想的仓库，也是智慧的瑰宝。</p>
                 <p style="text-align: right;">—— 莎士比亚</p>

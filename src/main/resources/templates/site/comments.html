@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org" th:fragment="comments">
-<body>
+<body th:style="${'background-size: cover;background-image: url('+commons.social_bg()+');'}">
 
 <div th:if="${article.allowComment}" class="comment-allow">
     <div id="comments-content" th:if="${article}!=null">

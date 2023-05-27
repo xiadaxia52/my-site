@@ -9,7 +9,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
     <title><th:block th:text="${title!=null?title:'blog'}"></th:block></title>
-    <link rel="shortcut icon" th:href="@{http://101.33.242.152:59000/test/upload/20230519/5fad00c85f082292380b9659591e4917.jpg}" type="image/x-icon">
+    <link rel="shortcut icon" th:href="@{${commons.social_logo()}}" type="image/x-icon">
 
     <meta name="google-site-verification" th:content="${google_site_verification}" />
     <meta name="baidu-site-verification" th:content="${baidu_site_verification}" />
@@ -38,6 +38,5 @@
     <link th:href="@{/site/css/effects/set2.css}" rel="stylesheet" type="text/css">
     <link th:href="@{/site/css/effects/normalize.css}" rel="stylesheet" type="text/css">
     <link th:href="@{/site/css/effects/component.css}"  rel="stylesheet" type="text/css" >
-    <link th:href="@{/site/css/change.css}"  rel="stylesheet" type="text/css" >
 </head>
 </html>
